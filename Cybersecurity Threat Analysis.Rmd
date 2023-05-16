@@ -1,0 +1,20 @@
+The dataset consists of 3984 rows and 16 columns.
+
+cve_id: The unique identifier for the vulnerability.
+vendor_project: The name of the vendor or project affected by the vulnerability.
+product: The name of the product affected by the vulnerability.
+vulnerability_name: The name of the vulnerability.
+date_added: The date the vulnerability was added to the dataset.
+short_description: A brief description of the vulnerability.
+required_action: The recommended action to be taken to remediate the vulnerability.
+due_date: The date by which the recommended action should be taken.
+notes: Additional notes on the vulnerability.
+grp: The group responsible for handling the vulnerability.
+pub_date: The date the vulnerability was published.
+cvss: The Common Vulnerability Scoring System (CVSS) score of the vulnerability.
+cwe: The Common Weakness Enumeration (CWE) ID of the vulnerability.
+vector: The vector string of the vulnerability.
+complexity: The complexity level of the vulnerability.
+severity: The severity level of the vulnerability.
+
+The summary of the dataset shows that there are missing values in the notes, pub_date, cvss, and cwe columns. The due_date column has a minimum value of 2020-01-29, which is earlier than the earliest date in the date_added column. This might indicate some inconsistencies in the data that need to be resolved. The cvss column has a mean value of 8.412, indicating that the vulnerabilities in this dataset are generally of high severity. The complexity and severity columns are categorical variables.
