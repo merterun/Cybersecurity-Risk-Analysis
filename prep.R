@@ -20,3 +20,4 @@ sapply(all_df, function(x) sum(is.na(x)))
 str(all_df)
 
 
+write.csv(all_df, file="all_enriched.csv")
