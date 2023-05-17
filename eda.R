@@ -79,15 +79,57 @@ ggplot(data = vuln_type_counts, aes(x = Vulnerability_Type, y = Count)) +
   ylab("Count") +
   ggtitle("Frequency of Vulnerability Types")
 
-##Correlation between severity ratings and complexity of vulnerabilities
+
 ##Proportion of vulnerabilities with due dates met
-##Analysis of vulnerabilities by Common Weakness Enumeration (CWE) categories
+
+# Calculate the proportion of vulnerabilities with due dates met
+proportion_due_dates_met <- sum(!is.na(all_imp$due_date)) / nrow(all_imp) * 100
+
+# Print the result
+print(paste("Proportion of vulnerabilities with due dates met:", proportion_due_dates_met, "%"))
+
 ##Distribution of vulnerabilities by vector (e.g., network, local)
+
+# Count vulnerabilities by vector
+vulnerabilities_by_vector <- all_imp %>%
+  group_by(vector) %>%
+  summarise(count = n())
+
+# Print the result
+print(vulnerabilities_by_vector)
+
+# Create a pie chart for vulnerabilities by vector
+chart_vector <- ggplot(vulnerabilities_by_vector, aes(x = "", y = count, fill = vector)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  labs(fill = "Vector", title = "Distribution of Vulnerabilities by Vector") +
+  theme_void()
+
+chart_vector
+
 ##Distribution of vulnerabilities by complexity level
-##Analysis of required actions for vulnerabilities
-##Comparison of vulnerability patterns across different vendors or products
-##Analysis of vulnerability publication dates(seasonal)
+
+# Distribution of vulnerabilities by complexity level
+complexity_counts <- table(all_imp$complexity)
+complexity_counts
+
+barplot(complexity_counts, main = "Distribution of Vulnerabilities by Complexity Level", xlab = "Complexity Level", ylab = "Count")
+
+
 ##Trend analysis of vulnerability discoveries over time
+
+# Count the number of vulnerabilities discovered per year
+yearly_counts <- all_imp %>%
+  group_by(pub_year) %>%
+  summarise(count = n())
+
+# Plot the trend of vulnerability discoveries over time
+ggplot(yearly_counts, aes(x = pub_year, y = count)) +
+  geom_line() +
+  labs(title = "Trend of Vulnerability Discoveries Over Time",
+       x = "Year", y = "Count")
+
+
 ##Identification of top 10 vendors with the highest number of vulnerabilities
 ##Identification of top 10 products with the highest number of vulnerabilities
 ##Analysis of the most common CWE categories among vulnerabilities
