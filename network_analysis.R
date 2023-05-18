@@ -29,19 +29,12 @@ plot(g, layout = layout, vertex.size = 10, vertex.label.cex = 0.6, edge.arrow.si
 
 
 
-# Install and load the networkD3 package
 library(networkD3)
-
-
 # Convert the igraph object to a networkD3 object
 nd <- igraph_to_networkD3(g)
-
-# Rename the column from 'group' to 'Group'
-colnames(nd$nodes)[colnames(nd$nodes) == 'group'] <- 'Group'
-
 # Create an interactive plot
 forceNetwork(Links = nd$links, Nodes = nd$nodes, Source = "source", Target = "target",
-             NodeID = "name", Group = "Group", width = 800, height = 600)
-
-
-
+             NodeID = "name", width = 800, height = 600,
+             opacity = 0.8, linkDistance = 100,
+             bounded = TRUE, linkColour = "#999999", colourScale = JS("d3.scaleOrdinal().range(['#66CCFF'])"),
+             legend = TRUE)
