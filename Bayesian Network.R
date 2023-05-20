@@ -7,10 +7,13 @@ BiocManager::install("Rgraphviz")
 
 library(Rgraphviz)
 
-# Learn the structure of the Bayesian network
-graphviz.plot(bn, main = "Bayesian Network")
+# Learn the structure of the Bayesian network using the dataset
+bn <- hc(all_num_clean)
 
-plot(bn)
+
+g <- Rgraphviz::layoutGraph(bnlearn::as.graphNEL(bn))
+graph::nodeRenderInfo(g) <- list(fontsize=100)
+Rgraphviz::renderGraph(g)
+
 
 #CRITICAL = 1, HIGH = 2, LOW = 3, MEDIUM 4
-
