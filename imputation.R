@@ -112,20 +112,3 @@ same_na_rows # :(
 all_imp <- na.omit(all_imp)
 
 colSums(is.na(all_imp))
-
-
-
-# Identify numeric columns
-numeric_cols <- sapply(all_imp, is.numeric)
-
-# Convert numeric columns to numeric type
-all_num_clean <- all_imp
-all_num_clean[numeric_cols] <- lapply(all_num_clean[numeric_cols], function(x) as.numeric(as.character(x)))
-
-# Verify the structure of the new data frame
-str(all_num_clean)
-
-colSums(is.na(all_num_clean))
-
-
-
