@@ -18,8 +18,9 @@ product_relationships2 <- all_imp %>%
   select(vulnerability_name, product) %>%
   distinct() %>%
   group_by(vulnerability_name) %>%
-  summarise(products = paste(product, collapse = ", ")) %>%
-  arrange(desc(nchar(products))) %>%
+  summarise(num_products_affected = n(),
+            products = paste(product, collapse = ", ")) %>%
+  arrange(desc(num_products_affected)) %>%
   head(15)
 
 product_relationships2 <- product_relationships2 %>%
