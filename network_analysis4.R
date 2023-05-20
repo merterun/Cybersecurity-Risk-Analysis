@@ -42,14 +42,24 @@ layout_df <- data.frame(layout)
 # Add vendor/product names to layout data frame
 layout_df$names <- V(graph)$name
 
-# Create network graph using ggplot2
-graph_plot <- ggplot(layout_df, aes(x = x, y = y)) +
-  geom_segment(aes(x = x[.group], y = y[.group], xend = x[.group.1], yend = y[.group.1]),
-               alpha = 0.3, color = "gray") +
-  geom_point(size = 3, shape = 21, fill = "skyblue", color = "black") +
-  geom_text_repel(aes(label = names), color = "black", box.padding = 0.5) +
+library(ggraph)
+
+graph_plot <- ggraph(graph, layout = "fr") +
+  geom_edge_link() +
+  geom_node_point(shape = 21, fill = "skyblue", color = "black") +
+  geom_node_text(aes(label = name), repel = TRUE, box.padding = 0.5, size = 3) +
   theme_void()
 
-# Display hoverable names in the network graph
-ggplotly(graph_plot)
+# Alternative with all texts displayed but there are a lot of overlaps
+# graph_plot <- ggraph(graph, layout = "fr") +
+#    geom_edge_link() +
+#    geom_node_point(shape = 21, fill = "skyblue", color = "black") +
+#    geom_node_text(aes(label = name), repel = TRUE, box.padding = 0.5, size = 3, max.overlaps = 1000) +
+#    theme_void()
+
+graph_plot
+
+
+
+
 
