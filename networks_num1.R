@@ -3,7 +3,7 @@
 g <- graph(edges = numeric(0))
 
 # Get unique vendors/products
-vendors_products <- unique(all_num_clean$vendor_project)
+vendors_products <- unique(all_imp$vendor_project)
 
 # Add vendors/products as vertices to the graph
 g <- add_vertices(g, length(vendors_products), name = vendors_products)
@@ -17,7 +17,7 @@ for (i in 1:(length(vendors_products) - 1)) {
     # Check for missing values and exclude self-loops
     if (!is.na(vendor_product1) && !is.na(vendor_product2) && vendor_product1 != vendor_product2) {
       # Count the number of vulnerabilities shared between the pair
-      shared_vulnerabilities <- sum(all_num_clean$vendor_project == vendor_product1 & all_num_clean$vendor_project == vendor_product2, na.rm = TRUE)
+      shared_vulnerabilities <- sum(all_imp$vendor_project == vendor_product1 & all_imp$vendor_project == vendor_product2, na.rm = TRUE)
       
       # Add an edge between the pair with a weight equal to the number of shared vulnerabilities
       if (shared_vulnerabilities > 0) {
@@ -74,7 +74,3 @@ degree_centrality2 <- degree(g2)
 hist(degree_centrality2, main = "Degree Centrality Distribution", xlab = "Degree Centrality")
 
 plot(g2, layout = layout_with_fr(g2), vertex.size = 10, vertex.label.cex = 0.8, main = "Network Graph")
-
-
-
-
