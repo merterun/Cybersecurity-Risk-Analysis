@@ -1,1 +1,3 @@
+In this data analysis project, we're going to conduct a very comprehensive case study on cybersecurity risks, specifically focusing on the vulnerabilities reported in the year 2022. By analyzing a comprehensive dataset obtained from the Cybersecurity and Infrastructure Security Agency (CISA), we aim to gain insights into the nature of these vulnerabilities, the affected products, and their potential impact on the security landscape.
 
+Throughout this analysis, we will employ the powerful data analysis and visualization capabilities of the R programming language. By applying various techniques and methodologies, ranging from Network, Clustering and Bayesian Analysis.
